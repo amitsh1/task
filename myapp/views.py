@@ -19,14 +19,17 @@ def get_all_messages(request):
             }
         )      
 
-
+def get1(request):
+    return JsonResponse(
+        request.GET
+        )  
 
 @csrf_exempt
 def get_all_messages_for_receiver(request,receiver):
     return JsonResponse(
         {
             "messages":[x.todict() for x in 
-            get_messages(receiver=receiver) 
+            get_messages(**request.GET) 
             ]  
             }
         )      
@@ -37,7 +40,7 @@ def get_unread_messages_for_receiver(request,receiver):
     return JsonResponse(
         {
             "messages":[x.todict() for x in 
-            get_messages(receiver=receiver,filter_read=False)
+            get_messages(**request.GET,filter_read=False)
             ] 
             }
         )      

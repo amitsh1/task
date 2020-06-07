@@ -51,7 +51,7 @@ def get_unread_messages_for_receiver(request):
 def read_message(request):
     kwargs = {}
     for key,value in request.GET.items():
-        kwargs[key]=value  
+        kwargs[key]=value[0]
     message = Message.objects.filter(**kwargs)
     if list(message)!=[]:
         message=message[0]    
@@ -62,7 +62,7 @@ def read_message(request):
             ) 
     else:
         return JsonResponse(
-                    {"message":f"no unread messages for message_id: {message_id}"}
+                    {"message":f"no unread messages"}
                     )         
 
 @csrf_exempt

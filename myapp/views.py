@@ -26,6 +26,7 @@ def get1(request):
 
 @csrf_exempt
 def get_all_messages_for_receiver(request):
+    print(request.GET)
     return JsonResponse(
         {
             "messages":[x.todict() for x in 
@@ -47,8 +48,8 @@ def get_unread_messages_for_receiver(request):
  
 
 @csrf_exempt
-def read_message(request,message_id):
-    message = Message.objects.filter(message_id=message_id)
+def read_message(request):
+    message = Message.objects.filter(**request.GET)
     if list(message)!=[]:
         message=message[0]    
         message.is_read = True
@@ -62,8 +63,8 @@ def read_message(request,message_id):
                     )         
 
 @csrf_exempt
-def delete_message(request,message_id):
-    message = Message.objects.filter(message_id=message_id)
+def delete_message(request):
+    message = Message.objects.filter(**request.GET)
     if list(message)!=[]:
         message=message[0]
         message.delete()
@@ -77,6 +78,7 @@ def delete_message(request,message_id):
 @csrf_exempt
 def write_message(request,**kwargs):
     if request.method == 'POST': 
+        print('sdf',request.body)
         kwargs = json.loads(request.body)
         message = Message(**kwargs)
         message.save()
@@ -86,8 +88,8 @@ def write_message(request,**kwargs):
 def get_messages(receiver=None,filter_read=None):
     # t = str(len(Message.objects.get()))
     kwargs = {}
-    if receiver:
-        kwargs['receiver']=receiver
+    if receiver and type(receiver)==list:
+        kwargs['receiver']=receiver[0]
     if filter_read!=None:
         kwargs['is_read']=filter_read
 

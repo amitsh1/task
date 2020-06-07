@@ -25,7 +25,7 @@ def get1(request):
         )  
 
 @csrf_exempt
-def get_all_messages_for_receiver(request,receiver):
+def get_all_messages_for_receiver(request):
     return JsonResponse(
         {
             "messages":[x.todict() for x in 
@@ -36,7 +36,7 @@ def get_all_messages_for_receiver(request,receiver):
 
 
 @csrf_exempt
-def get_unread_messages_for_receiver(request,receiver):
+def get_unread_messages_for_receiver(request):
     return JsonResponse(
         {
             "messages":[x.todict() for x in 

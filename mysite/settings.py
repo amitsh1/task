@@ -25,7 +25,7 @@ SECRET_KEY = 'wv+b@g&n3dpygp14i!0fxv5b!#!xka-d!4fm6vo6triqkbi4uc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sheltered-journey-85001.herokuapp.com']
 
 
 # Application definition

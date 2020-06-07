@@ -49,7 +49,10 @@ def get_unread_messages_for_receiver(request):
 
 @csrf_exempt
 def read_message(request):
-    message = Message.objects.filter(**request.GET)
+    kwargs = {}
+    for key,value in request.GET.items():
+        kwargs[key]=value  
+    message = Message.objects.filter(**kwargs)
     if list(message)!=[]:
         message=message[0]    
         message.is_read = True
@@ -64,7 +67,10 @@ def read_message(request):
 
 @csrf_exempt
 def delete_message(request):
-    message = Message.objects.filter(**request.GET)
+    kwargs = {}
+    for key,value in request.GET.items():
+        kwargs[key]=value  
+    message = Message.objects.filter(**kwargs)
     if list(message)!=[]:
         message=message[0]
         message.delete()

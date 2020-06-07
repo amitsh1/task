@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0003_message_is_read'),
+        ('myapp', '0003_message_is_read'),
     ]
 
     operations = [

@@ -4,7 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('bla/',views.get1,name="asdas"),
     path('write/', views.write_message, name='write'),
     path('get_all/', views.get_all_messages_for_receiver, name='get_all_reciver'),
     path('get_unread/', views.get_unread_messages_for_receiver, name='get_unread_reciver'),    

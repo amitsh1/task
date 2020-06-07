@@ -19,10 +19,6 @@ def get_all_messages(request):
             }
         )      
 
-def get1(request):
-    return JsonResponse(
-        request.GET
-        )  
 
 @csrf_exempt
 def get_all_messages_for_receiver(request):
@@ -84,7 +80,6 @@ def delete_message(request):
 @csrf_exempt
 def write_message(request,**kwargs):
     if request.method == 'POST': 
-        print('sdf',request.body)
         kwargs = json.loads(request.body)
         message = Message(**kwargs)
         message.save()
@@ -92,7 +87,6 @@ def write_message(request,**kwargs):
 
 
 def get_messages(receiver=None,filter_read=None):
-    # t = str(len(Message.objects.get()))
     kwargs = {}
     if receiver and type(receiver)==list:
         kwargs['receiver']=receiver[0]
@@ -100,10 +94,4 @@ def get_messages(receiver=None,filter_read=None):
         kwargs['is_read']=filter_read
 
     return Message.objects.filter(**kwargs)
-    return 
-        # return HttpResponse("Hello, world. You're at the polls index.")
-    return JsonResponse(
-        {
-            "messages":[x.todict() for x in Message.objects.filter(**kwargs)]
-            }
-        )        
+ 
